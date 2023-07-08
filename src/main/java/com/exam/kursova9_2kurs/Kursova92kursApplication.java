@@ -8,7 +8,6 @@ public class Kursova92kursApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Kursova92kursApplication.class, args);
-        System.out.println();
     }
 
 }
