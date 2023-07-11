@@ -55,5 +55,6 @@ public class JavaQuestionServiceTest {
     @Test
     public void getRandomQuestionWorksCorrect() {
         assertEquals(Question.class, javaQuestionService.getRandomQuestion().getClass());
+        assertTrue(javaQuestionService.getAll().contains(javaQuestionService.getRandomQuestion()));
     }
 }

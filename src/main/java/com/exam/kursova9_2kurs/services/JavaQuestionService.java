@@ -11,7 +11,7 @@ import java.util.*;
 @Service
 public class JavaQuestionService implements QuestionService {
 
-    private List<Question> questions = new ArrayList<>();
+    private final List<Question> questions = new ArrayList<>();
 
     @Override
     public Question add(String question, String answer){

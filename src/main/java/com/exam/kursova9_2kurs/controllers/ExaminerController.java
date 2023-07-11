@@ -14,11 +14,11 @@ public class ExaminerController {
     }
 
     @RequestMapping(value = "/get/{amount}", method = RequestMethod.GET)
-    public String getQuestions(@PathVariable String amount){
+    public String getQuestions(@PathVariable Integer amount){
         try{
-            return examinerService.getQuestions(Integer.parseInt(amount)).toString();
+            return examinerService.getQuestions(amount).toString();
         } catch (MoreRequestedThanAvaliableException e){
-            return "Something went wrong :^)";
+            return "There are no so many questions in question list :^)";
         }
     }
 }

@@ -17,7 +17,6 @@ import java.util.Set;
 public class ExaminerServiceImpl implements ExaminerService {
 
     private final QuestionService questionService;
-    private final Set<Question> examQuestions = new HashSet<>();
 
     public ExaminerServiceImpl(QuestionService questionService) {
         this.questionService = questionService;
@@ -28,6 +27,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         if(amount > questionService.getAll().size()){
             throw new MoreRequestedThanAvaliableException();
         }
+        Set<Question> examQuestions = new HashSet<>();
         while (examQuestions.size() < amount){
             examQuestions.add(questionService.getRandomQuestion());
         }

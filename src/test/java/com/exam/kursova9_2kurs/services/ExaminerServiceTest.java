@@ -41,6 +41,7 @@ public class ExaminerServiceTest {
     public void getQuestionsWorksCorrect() {
         int amountExpected = 2;
 
+        assertTrue(questions.containsAll(examinerService.getQuestions(2)));
         assertEquals(amountExpected, examinerService.getQuestions(2).size());
         assertThrows(MoreRequestedThanAvaliableException.class, () -> examinerService.getQuestions(10));
     }
