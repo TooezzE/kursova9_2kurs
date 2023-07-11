@@ -12,7 +12,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ExaminerServiceTest {
 
     @Mock
-    QuestionService questionService;
+    JavaQuestionService questionService;
 
     @InjectMocks
     ExaminerServiceImpl examinerService;
@@ -32,9 +34,13 @@ public class ExaminerServiceTest {
             new Question("Who?")
     );
 
+    Random random = new Random();
+
     @BeforeEach
     public void setUp() {
         Mockito.when(questionService.getAll()).thenReturn(questions);
+        Mockito.when(Mockito.spy(questionService).getRandomQuestion())
+                .thenReturn(questions.get(random.nextInt(3)));
     }
 
     @Test
