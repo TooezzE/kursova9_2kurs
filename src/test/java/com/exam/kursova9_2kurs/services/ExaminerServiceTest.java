@@ -2,7 +2,6 @@ package com.exam.kursova9_2kurs.services;
 
 import com.exam.kursova9_2kurs.dto.Question;
 import com.exam.kursova9_2kurs.exceptions.MoreRequestedThanAvaliableException;
-import com.exam.kursova9_2kurs.interfaces.QuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,9 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,19 +31,16 @@ public class ExaminerServiceTest {
             new Question("Who?")
     );
 
-    Random random = new Random();
-
     @BeforeEach
     public void setUp() {
         Mockito.when(questionService.getAll()).thenReturn(questions);
-        Mockito.when(Mockito.spy(questionService).getRandomQuestion())
-                .thenReturn(questions.get(random.nextInt(3)));
     }
 
     @Test
     public void getQuestionsWorksCorrect() {
         int amountExpected = 2;
-
+        Mockito.when(questionService.getRandomQuestion()).thenReturn(questions.get(0), questions.get(1),
+                                                                    questions.get(2), questions.get(3));
         assertTrue(questions.containsAll(examinerService.getQuestions(2)));
         assertEquals(amountExpected, examinerService.getQuestions(2).size());
         assertThrows(MoreRequestedThanAvaliableException.class, () -> examinerService.getQuestions(10));
